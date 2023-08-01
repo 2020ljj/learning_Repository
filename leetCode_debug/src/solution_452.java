@@ -18,14 +18,11 @@ public class solution_452 {
                 return Integer.compare(e1[0],e2[0]);                     // e1[0]-e2[0]表示对于第一列元素进行升序排序
             }
         });
-        int left = points[0][0],right = points[0][1],ans = 1;
+        int right = points[0][1],ans = 1;
         for(int i = 1 ; i < points.length; i++){
-            if(points[i][0] <= right){
-                left = points[i][0];
+            if(points[i][0] <= right)
                 right = Math.min(right,points[i][1]);
-            }
             else{
-                left = points[i][0];
                 right = points[i][1];
                 ans ++;
             }
