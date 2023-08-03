@@ -1,7 +1,7 @@
 import java.util.*;
 
-public class solution_207 {
-    public boolean canFinish(int numCourses,int[][] prerequisites){
+public class solution_210 {
+    public int[] findOrder(int numCourses,int[][] prerequisites){
         List<ArrayList<Integer>> collar = new ArrayList<>();
         Queue<Integer> queue = new LinkedList<>();
         int []inDegree = new int[numCourses];
@@ -26,10 +26,10 @@ public class solution_207 {
                     queue.add(cur);
             }
         }
-        return ans == 0;
+        return ans == 0?courseLine:new int[0];
     }
     public static void main(String[] args) {
-        solution_207 solution = new solution_207();
+        solution_210 solution = new solution_210();
 
         //定义入参
         int numCourses = 4;
@@ -51,7 +51,7 @@ public class solution_207 {
 //            }
 //        }
 
-        boolean ans = solution.canFinish(numCourses,prerequisites);
-        System.out.println(ans);
+        int []ans = solution.findOrder(numCourses,prerequisites);
+        System.out.println(Arrays.toString(ans));
     }
 }
