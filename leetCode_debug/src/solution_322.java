@@ -1,40 +1,29 @@
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Arrays;
 
 public class solution_322 {
-    private Map<Integer ,Integer> map = new HashMap<>();
-    public int coinChange(int coins[] , int amount){
-        for(int i : coins)
-            map.put(i,1);
-        int []ans = new int[amount + 1];
-        ans[0] = 0;
-        ans[1] = map.getOrDefault(1,-1);
-        if(amount<2)
-            return ans[amount];
-        for(int i = 2 ; i < amount+2 ; i++){
-            ans[i] = ans[i-1] + ans[i-2];
+    private int []coins_sorted;
+    public int coinChange(int[] coins, int amount) {
+        int max = amount + 1;
+        int[] dp = new int[amount + 1];
+        Arrays.fill(dp, max);
+        dp[0] = 0;
+        for (int i = 1; i <= amount; i++) {
+            for (int j = 0; j < coins.length; j++) {
+                if (coins[j] <= i) {
+                    dp[i] = Math.min(dp[i], dp[i - coins[j]] + 1);
+                }
+            }
         }
-        return 0;
+        return dp[amount] > amount ? -1 : dp[amount];
     }
-
-    /**
-     *     0 1 2 3 4 5 6 7 8 9
-     *  0  0 0 0 0
-     *  1    1 2 3 4
-     *  3        1
-     *  5           1
-     *
-     *
-     * @param args
-     */
     public static void main(String[] args) {
         solution_322 solution = new solution_322();
 
         //定义入参
-        int []coins = {1,2,5};
-        int amount = 11;
+        int  []coins = {2};
+        int amount = 3;
         //输入入参
-        solution.coinChange(coins,amount);
-        System.out.println();
+        int ans = solution.coinChange(coins,amount);
+        System.out.println(ans);
     }
 }
